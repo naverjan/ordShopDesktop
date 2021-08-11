@@ -1,0 +1,277 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="ordShopModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="ord_clients">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="identification" Type="varchar" MaxLength="25" Nullable="false" />
+          <Property Name="name" Type="varchar" MaxLength="125" Nullable="false" />
+          <Property Name="addres" Type="varchar" MaxLength="150" />
+        </EntityType>
+        <EntityType Name="ord_products">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="code" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="name" Type="varchar" MaxLength="150" Nullable="false" />
+          <Property Name="value" Type="decimal" Precision="18" Scale="0" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ord_purchaseOrders">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="date" Type="datetime" />
+          <Property Name="idClient" Type="bigint" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ord_purchaseOrdersBody">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="date" Type="datetime" />
+          <Property Name="idOrder" Type="bigint" Nullable="false" />
+          <Property Name="idProduct" Type="bigint" Nullable="false" />
+          <Property Name="cant" Type="int" Nullable="false" />
+          <Property Name="valueUnit" Type="decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="valueTotal" Type="decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="priority" Type="bit" Nullable="false" />
+        </EntityType>
+        <Association Name="FK__ord_purch__idCli__5070F446">
+          <End Role="ord_clients" Type="Self.ord_clients" Multiplicity="1" />
+          <End Role="ord_purchaseOrders" Type="Self.ord_purchaseOrders" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ord_clients">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="ord_purchaseOrders">
+              <PropertyRef Name="idClient" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ord_purch__idOrd__5535A963">
+          <End Role="ord_purchaseOrders" Type="Self.ord_purchaseOrders" Multiplicity="1" />
+          <End Role="ord_purchaseOrdersBody" Type="Self.ord_purchaseOrdersBody" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ord_purchaseOrders">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="ord_purchaseOrdersBody">
+              <PropertyRef Name="idOrder" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ord_purch__idPro__5441852A">
+          <End Role="ord_products" Type="Self.ord_products" Multiplicity="1" />
+          <End Role="ord_purchaseOrdersBody" Type="Self.ord_purchaseOrdersBody" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ord_products">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="ord_purchaseOrdersBody">
+              <PropertyRef Name="idProduct" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="ordShopModelStoreContainer">
+          <EntitySet Name="ord_clients" EntityType="Self.ord_clients" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ord_products" EntityType="Self.ord_products" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ord_purchaseOrders" EntityType="Self.ord_purchaseOrders" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ord_purchaseOrdersBody" EntityType="Self.ord_purchaseOrdersBody" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__ord_purch__idCli__5070F446" Association="Self.FK__ord_purch__idCli__5070F446">
+            <End Role="ord_clients" EntitySet="ord_clients" />
+            <End Role="ord_purchaseOrders" EntitySet="ord_purchaseOrders" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ord_purch__idOrd__5535A963" Association="Self.FK__ord_purch__idOrd__5535A963">
+            <End Role="ord_purchaseOrders" EntitySet="ord_purchaseOrders" />
+            <End Role="ord_purchaseOrdersBody" EntitySet="ord_purchaseOrdersBody" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ord_purch__idPro__5441852A" Association="Self.FK__ord_purch__idPro__5441852A">
+            <End Role="ord_products" EntitySet="ord_products" />
+            <End Role="ord_purchaseOrdersBody" EntitySet="ord_purchaseOrdersBody" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="ordShopModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="ord_clients">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="identification" Type="String" MaxLength="25" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="name" Type="String" MaxLength="125" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="addres" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="ord_purchaseOrders" Relationship="Self.FK__ord_purch__idCli__5070F446" FromRole="ord_clients" ToRole="ord_purchaseOrders" />
+        </EntityType>
+        <EntityType Name="ord_products">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="code" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="name" Type="String" MaxLength="150" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="value" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
+          <NavigationProperty Name="ord_purchaseOrdersBody" Relationship="Self.FK__ord_purch__idPro__5441852A" FromRole="ord_products" ToRole="ord_purchaseOrdersBody" />
+        </EntityType>
+        <EntityType Name="ord_purchaseOrders">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="date" Type="DateTime" Precision="3" />
+          <Property Name="idClient" Type="Int64" Nullable="false" />
+          <NavigationProperty Name="ord_clients" Relationship="Self.FK__ord_purch__idCli__5070F446" FromRole="ord_purchaseOrders" ToRole="ord_clients" />
+          <NavigationProperty Name="ord_purchaseOrdersBody" Relationship="Self.FK__ord_purch__idOrd__5535A963" FromRole="ord_purchaseOrders" ToRole="ord_purchaseOrdersBody" />
+        </EntityType>
+        <EntityType Name="ord_purchaseOrdersBody">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="date" Type="DateTime" Precision="3" />
+          <Property Name="idOrder" Type="Int64" Nullable="false" />
+          <Property Name="idProduct" Type="Int64" Nullable="false" />
+          <Property Name="cant" Type="Int32" Nullable="false" />
+          <Property Name="valueUnit" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="valueTotal" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="priority" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="ord_products" Relationship="Self.FK__ord_purch__idPro__5441852A" FromRole="ord_purchaseOrdersBody" ToRole="ord_products" />
+          <NavigationProperty Name="ord_purchaseOrders" Relationship="Self.FK__ord_purch__idOrd__5535A963" FromRole="ord_purchaseOrdersBody" ToRole="ord_purchaseOrders" />
+        </EntityType>
+        <Association Name="FK__ord_purch__idCli__5070F446">
+          <End Role="ord_clients" Type="Self.ord_clients" Multiplicity="1" />
+          <End Role="ord_purchaseOrders" Type="Self.ord_purchaseOrders" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ord_clients">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="ord_purchaseOrders">
+              <PropertyRef Name="idClient" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ord_purch__idPro__5441852A">
+          <End Role="ord_products" Type="Self.ord_products" Multiplicity="1" />
+          <End Role="ord_purchaseOrdersBody" Type="Self.ord_purchaseOrdersBody" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ord_products">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="ord_purchaseOrdersBody">
+              <PropertyRef Name="idProduct" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ord_purch__idOrd__5535A963">
+          <End Role="ord_purchaseOrders" Type="Self.ord_purchaseOrders" Multiplicity="1" />
+          <End Role="ord_purchaseOrdersBody" Type="Self.ord_purchaseOrdersBody" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ord_purchaseOrders">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="ord_purchaseOrdersBody">
+              <PropertyRef Name="idOrder" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="ordShopEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="ord_clients" EntityType="Self.ord_clients" />
+          <EntitySet Name="ord_products" EntityType="Self.ord_products" />
+          <EntitySet Name="ord_purchaseOrders" EntityType="Self.ord_purchaseOrders" />
+          <EntitySet Name="ord_purchaseOrdersBody" EntityType="Self.ord_purchaseOrdersBody" />
+          <AssociationSet Name="FK__ord_purch__idCli__5070F446" Association="Self.FK__ord_purch__idCli__5070F446">
+            <End Role="ord_clients" EntitySet="ord_clients" />
+            <End Role="ord_purchaseOrders" EntitySet="ord_purchaseOrders" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ord_purch__idPro__5441852A" Association="Self.FK__ord_purch__idPro__5441852A">
+            <End Role="ord_products" EntitySet="ord_products" />
+            <End Role="ord_purchaseOrdersBody" EntitySet="ord_purchaseOrdersBody" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ord_purch__idOrd__5535A963" Association="Self.FK__ord_purch__idOrd__5535A963">
+            <End Role="ord_purchaseOrders" EntitySet="ord_purchaseOrders" />
+            <End Role="ord_purchaseOrdersBody" EntitySet="ord_purchaseOrdersBody" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="ordShopModelStoreContainer" CdmEntityContainer="ordShopEntities">
+          <EntitySetMapping Name="ord_clients">
+            <EntityTypeMapping TypeName="ordShopModel.ord_clients">
+              <MappingFragment StoreEntitySet="ord_clients">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="identification" ColumnName="identification" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="addres" ColumnName="addres" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ord_products">
+            <EntityTypeMapping TypeName="ordShopModel.ord_products">
+              <MappingFragment StoreEntitySet="ord_products">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="code" ColumnName="code" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="value" ColumnName="value" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ord_purchaseOrders">
+            <EntityTypeMapping TypeName="ordShopModel.ord_purchaseOrders">
+              <MappingFragment StoreEntitySet="ord_purchaseOrders">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="date" ColumnName="date" />
+                <ScalarProperty Name="idClient" ColumnName="idClient" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ord_purchaseOrdersBody">
+            <EntityTypeMapping TypeName="ordShopModel.ord_purchaseOrdersBody">
+              <MappingFragment StoreEntitySet="ord_purchaseOrdersBody">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="date" ColumnName="date" />
+                <ScalarProperty Name="idOrder" ColumnName="idOrder" />
+                <ScalarProperty Name="idProduct" ColumnName="idProduct" />
+                <ScalarProperty Name="cant" ColumnName="cant" />
+                <ScalarProperty Name="valueUnit" ColumnName="valueUnit" />
+                <ScalarProperty Name="valueTotal" ColumnName="valueTotal" />
+                <ScalarProperty Name="priority" ColumnName="priority" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Ninguno" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
