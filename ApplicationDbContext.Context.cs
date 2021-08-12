@@ -13,10 +13,10 @@ namespace ordShop
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class ordShopEntities : DbContext
+    public partial class ordShopEntities1 : DbContext
     {
-        public ordShopEntities()
-            : base("name=ordShopEntities")
+        public ordShopEntities1()
+            : base("name=ordShopEntities1")
         {
         }
     

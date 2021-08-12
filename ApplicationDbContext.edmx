@@ -44,7 +44,7 @@
           <Property Name="valueTotal" Type="decimal" Precision="18" Scale="0" Nullable="false" />
           <Property Name="priority" Type="bit" Nullable="false" />
         </EntityType>
-        <Association Name="FK__ord_purch__idCli__5070F446">
+        <Association Name="FK__ord_purch__idCli__4E88ABD4">
           <End Role="ord_clients" Type="Self.ord_clients" Multiplicity="1" />
           <End Role="ord_purchaseOrders" Type="Self.ord_purchaseOrders" Multiplicity="*" />
           <ReferentialConstraint>
@@ -56,7 +56,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__ord_purch__idOrd__5535A963">
+        <Association Name="FK__ord_purch__idOrd__534D60F1">
           <End Role="ord_purchaseOrders" Type="Self.ord_purchaseOrders" Multiplicity="1" />
           <End Role="ord_purchaseOrdersBody" Type="Self.ord_purchaseOrdersBody" Multiplicity="*" />
           <ReferentialConstraint>
@@ -68,7 +68,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__ord_purch__idPro__5441852A">
+        <Association Name="FK__ord_purch__idPro__52593CB8">
           <End Role="ord_products" Type="Self.ord_products" Multiplicity="1" />
           <End Role="ord_purchaseOrdersBody" Type="Self.ord_purchaseOrdersBody" Multiplicity="*" />
           <ReferentialConstraint>
@@ -85,15 +85,15 @@
           <EntitySet Name="ord_products" EntityType="Self.ord_products" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ord_purchaseOrders" EntityType="Self.ord_purchaseOrders" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ord_purchaseOrdersBody" EntityType="Self.ord_purchaseOrdersBody" Schema="dbo" store:Type="Tables" />
-          <AssociationSet Name="FK__ord_purch__idCli__5070F446" Association="Self.FK__ord_purch__idCli__5070F446">
+          <AssociationSet Name="FK__ord_purch__idCli__4E88ABD4" Association="Self.FK__ord_purch__idCli__4E88ABD4">
             <End Role="ord_clients" EntitySet="ord_clients" />
             <End Role="ord_purchaseOrders" EntitySet="ord_purchaseOrders" />
           </AssociationSet>
-          <AssociationSet Name="FK__ord_purch__idOrd__5535A963" Association="Self.FK__ord_purch__idOrd__5535A963">
+          <AssociationSet Name="FK__ord_purch__idOrd__534D60F1" Association="Self.FK__ord_purch__idOrd__534D60F1">
             <End Role="ord_purchaseOrders" EntitySet="ord_purchaseOrders" />
             <End Role="ord_purchaseOrdersBody" EntitySet="ord_purchaseOrdersBody" />
           </AssociationSet>
-          <AssociationSet Name="FK__ord_purch__idPro__5441852A" Association="Self.FK__ord_purch__idPro__5441852A">
+          <AssociationSet Name="FK__ord_purch__idPro__52593CB8" Association="Self.FK__ord_purch__idPro__52593CB8">
             <End Role="ord_products" EntitySet="ord_products" />
             <End Role="ord_purchaseOrdersBody" EntitySet="ord_purchaseOrdersBody" />
           </AssociationSet>
@@ -111,7 +111,7 @@
           <Property Name="identification" Type="String" MaxLength="25" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="name" Type="String" MaxLength="125" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="addres" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="ord_purchaseOrders" Relationship="Self.FK__ord_purch__idCli__5070F446" FromRole="ord_clients" ToRole="ord_purchaseOrders" />
+          <NavigationProperty Name="ord_purchaseOrders" Relationship="Self.FK__ord_purch__idCli__4E88ABD4" FromRole="ord_clients" ToRole="ord_purchaseOrders" />
         </EntityType>
         <EntityType Name="ord_products">
           <Key>
@@ -121,7 +121,7 @@
           <Property Name="code" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="name" Type="String" MaxLength="150" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="value" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
-          <NavigationProperty Name="ord_purchaseOrdersBody" Relationship="Self.FK__ord_purch__idPro__5441852A" FromRole="ord_products" ToRole="ord_purchaseOrdersBody" />
+          <NavigationProperty Name="ord_purchaseOrdersBody" Relationship="Self.FK__ord_purch__idPro__52593CB8" FromRole="ord_products" ToRole="ord_purchaseOrdersBody" />
         </EntityType>
         <EntityType Name="ord_purchaseOrders">
           <Key>
@@ -130,8 +130,8 @@
           <Property Name="id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="date" Type="DateTime" Precision="3" />
           <Property Name="idClient" Type="Int64" Nullable="false" />
-          <NavigationProperty Name="ord_clients" Relationship="Self.FK__ord_purch__idCli__5070F446" FromRole="ord_purchaseOrders" ToRole="ord_clients" />
-          <NavigationProperty Name="ord_purchaseOrdersBody" Relationship="Self.FK__ord_purch__idOrd__5535A963" FromRole="ord_purchaseOrders" ToRole="ord_purchaseOrdersBody" />
+          <NavigationProperty Name="ord_clients" Relationship="Self.FK__ord_purch__idCli__4E88ABD4" FromRole="ord_purchaseOrders" ToRole="ord_clients" />
+          <NavigationProperty Name="ord_purchaseOrdersBody" Relationship="Self.FK__ord_purch__idOrd__534D60F1" FromRole="ord_purchaseOrders" ToRole="ord_purchaseOrdersBody" />
         </EntityType>
         <EntityType Name="ord_purchaseOrdersBody">
           <Key>
@@ -145,10 +145,10 @@
           <Property Name="valueUnit" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
           <Property Name="valueTotal" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
           <Property Name="priority" Type="Boolean" Nullable="false" />
-          <NavigationProperty Name="ord_products" Relationship="Self.FK__ord_purch__idPro__5441852A" FromRole="ord_purchaseOrdersBody" ToRole="ord_products" />
-          <NavigationProperty Name="ord_purchaseOrders" Relationship="Self.FK__ord_purch__idOrd__5535A963" FromRole="ord_purchaseOrdersBody" ToRole="ord_purchaseOrders" />
+          <NavigationProperty Name="ord_products" Relationship="Self.FK__ord_purch__idPro__52593CB8" FromRole="ord_purchaseOrdersBody" ToRole="ord_products" />
+          <NavigationProperty Name="ord_purchaseOrders" Relationship="Self.FK__ord_purch__idOrd__534D60F1" FromRole="ord_purchaseOrdersBody" ToRole="ord_purchaseOrders" />
         </EntityType>
-        <Association Name="FK__ord_purch__idCli__5070F446">
+        <Association Name="FK__ord_purch__idCli__4E88ABD4">
           <End Role="ord_clients" Type="Self.ord_clients" Multiplicity="1" />
           <End Role="ord_purchaseOrders" Type="Self.ord_purchaseOrders" Multiplicity="*" />
           <ReferentialConstraint>
@@ -160,7 +160,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__ord_purch__idPro__5441852A">
+        <Association Name="FK__ord_purch__idPro__52593CB8">
           <End Role="ord_products" Type="Self.ord_products" Multiplicity="1" />
           <End Role="ord_purchaseOrdersBody" Type="Self.ord_purchaseOrdersBody" Multiplicity="*" />
           <ReferentialConstraint>
@@ -172,7 +172,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__ord_purch__idOrd__5535A963">
+        <Association Name="FK__ord_purch__idOrd__534D60F1">
           <End Role="ord_purchaseOrders" Type="Self.ord_purchaseOrders" Multiplicity="1" />
           <End Role="ord_purchaseOrdersBody" Type="Self.ord_purchaseOrdersBody" Multiplicity="*" />
           <ReferentialConstraint>
@@ -184,20 +184,20 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="ordShopEntities" annotation:LazyLoadingEnabled="true">
+        <EntityContainer Name="ordShopEntities1" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="ord_clients" EntityType="Self.ord_clients" />
           <EntitySet Name="ord_products" EntityType="Self.ord_products" />
           <EntitySet Name="ord_purchaseOrders" EntityType="Self.ord_purchaseOrders" />
           <EntitySet Name="ord_purchaseOrdersBody" EntityType="Self.ord_purchaseOrdersBody" />
-          <AssociationSet Name="FK__ord_purch__idCli__5070F446" Association="Self.FK__ord_purch__idCli__5070F446">
+          <AssociationSet Name="FK__ord_purch__idCli__4E88ABD4" Association="Self.FK__ord_purch__idCli__4E88ABD4">
             <End Role="ord_clients" EntitySet="ord_clients" />
             <End Role="ord_purchaseOrders" EntitySet="ord_purchaseOrders" />
           </AssociationSet>
-          <AssociationSet Name="FK__ord_purch__idPro__5441852A" Association="Self.FK__ord_purch__idPro__5441852A">
+          <AssociationSet Name="FK__ord_purch__idPro__52593CB8" Association="Self.FK__ord_purch__idPro__52593CB8">
             <End Role="ord_products" EntitySet="ord_products" />
             <End Role="ord_purchaseOrdersBody" EntitySet="ord_purchaseOrdersBody" />
           </AssociationSet>
-          <AssociationSet Name="FK__ord_purch__idOrd__5535A963" Association="Self.FK__ord_purch__idOrd__5535A963">
+          <AssociationSet Name="FK__ord_purch__idOrd__534D60F1" Association="Self.FK__ord_purch__idOrd__534D60F1">
             <End Role="ord_purchaseOrders" EntitySet="ord_purchaseOrders" />
             <End Role="ord_purchaseOrdersBody" EntitySet="ord_purchaseOrdersBody" />
           </AssociationSet>
@@ -207,7 +207,7 @@
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="ordShopModelStoreContainer" CdmEntityContainer="ordShopEntities">
+        <EntityContainerMapping StorageEntityContainer="ordShopModelStoreContainer" CdmEntityContainer="ordShopEntities1">
           <EntitySetMapping Name="ord_clients">
             <EntityTypeMapping TypeName="ordShopModel.ord_clients">
               <MappingFragment StoreEntitySet="ord_clients">
@@ -265,7 +265,7 @@
     <Options>
       <DesignerInfoPropertySet>
         <DesignerProperty Name="ValidateOnBuild" Value="true" />
-        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
         <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
         <DesignerProperty Name="UseLegacyProvider" Value="false" />
         <DesignerProperty Name="CodeGenerationStrategy" Value="Ninguno" />
